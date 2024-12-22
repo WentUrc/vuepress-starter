@@ -40,7 +40,7 @@ export default defineThemeConfig({
                 justify-content: center;
                 gap: 8px;">
                 <a aria-label="Homepage" title="WentUrc Documents" href="https://docs.wenturc.com" style="display: inline-flex;">
-                    <img src="logo.svg" width="20" height="20" />
+                    <img src="/logo.svg" width="20" height="20" />
                 </a>
                 <span>© 2024 - present 
                     <span style="
