@@ -21,9 +21,15 @@ export default defineNavbarConfig([
           text: '前言',
           link: '/learn/',
         },
+
         {
           text: '工程力学',
           link: '/learn/工程力学/',
+        },
+
+        {
+          text: '建筑结构',
+          link: '/learn/建筑结构/',
         },
 
         {

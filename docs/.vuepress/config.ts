@@ -130,6 +130,11 @@ export default defineUserConfig({
                 items: ['/learn/工程力学/复习资料1.md','/learn/工程力学/题目1的解答.md','/learn/工程力学/题目解答2.md'],  // 同样这里也可以增加其他子页面
               },
               {
+                text: '建筑结构',
+                collapsed: false,
+                items: ['/learn/建筑结构/复习资料1.md',],
+              },
+              {
                 text: '管理学',
                 collapsed: false,
                 items: ['/learn/管理学/绪论.md','/learn/管理学/第一章.md', '/learn/管理学/第二章.md', '/learn/管理学/复习资料.md'],  // 同样这里也可以增加其他子页面
