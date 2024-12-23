@@ -1,5 +1,6 @@
 import { defineThemeConfig } from 'vuepress-theme-plume';
 import navbar from './navbar';
+import sidebar from './sidebar';
 
 export default defineThemeConfig({
     logo: '/logo.png',
@@ -14,6 +15,7 @@ export default defineThemeConfig({
     },
 
     navbar,
+    sidebar,
 
     footer: {
         message: `
