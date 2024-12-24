@@ -8,6 +8,7 @@ export default {
             items: [
             '/beta/',  // README.md 对应路径
             '/beta/1.md',
+            '/beta/2.md',
             ],
         },
     ],
