@@ -17,17 +17,8 @@ export default defineUserConfig({
     hostname: 'https://docs.wenturc.com',
 
     notes: false,
+    blog: false,
     autoFrontmatter: false,
-
-    blog: {
-      // 配置 封面图 布局位置
-      // postCover: 'left', // 'left' | 'right' | 'odd-left' | 'odd-right' | 'top'
-      postCover: {
-        layout: 'top',
-        ratio: '16:9',
-        compact: true
-      }
-    },
 
     plugins: {
       comment: {
