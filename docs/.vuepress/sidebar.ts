@@ -11,6 +11,7 @@ export default {
             ],
         },
     ],
+
     '/novel/':[
         {
             text: 'Novel',
@@ -40,6 +41,7 @@ export default {
             ]
         },
     ],
+
     '/GPTstory/': [
         {
             text: 'GPTstory',
@@ -54,6 +56,7 @@ export default {
             ],  // 这里也可以根据需要增加其他子页面
         },
     ],
+
     '/tech/': [
         {
             text: 'tech',
@@ -76,6 +79,7 @@ export default {
             ],  // 同样这里也可以增加其他子页面
         },
     ],
+    
     '/learn/': [
             //Group1
         {
@@ -84,22 +88,36 @@ export default {
                 {
                     text: '工程力学',
                     collapsed: false,
-                    items: ['/learn/工程力学/复习资料1.md','/learn/工程力学/题目1的解答.md','/learn/工程力学/题目解答2.md'],  // 同样这里也可以增加其他子页面
+                    items: [
+                        '/learn/工程力学/复习资料1.md',
+                        '/learn/工程力学/题目1的解答.md',
+                        '/learn/工程力学/题目解答2.md'
+                    ],  // 同样这里也可以增加其他子页面
                 },
                 {
                     text: '建筑结构',
                     collapsed: false,
-                    items: ['/learn/建筑结构/复习资料1.md',],
+                    items: [
+                        '/learn/建筑结构/复习资料1.md',
+                    ],
                 },
                 {
                     text: '管理学',
                     collapsed: false,
-                    items: ['/learn/管理学/绪论.md','/learn/管理学/第一章.md', '/learn/管理学/第二章.md', '/learn/管理学/复习资料.md'],  // 同样这里也可以增加其他子页面
+                    items: [
+                        '/learn/管理学/绪论.md',
+                        '/learn/管理学/第一章.md',
+                        '/learn/管理学/第二章.md', 
+                        '/learn/管理学/复习资料.md'
+                    ],  // 同样这里也可以增加其他子页面
                 },
                 {
                     text: '经济学',
                     collapsed: false,
-                    items: ['/learn/经济学/经济学期末考-复习1.md','/learn/经济学/经济学期末考-复习2.md'],  // 同样这里也可以增加其他子页面
+                    items: [
+                        '/learn/经济学/经济学期末考-复习1.md',
+                        '/learn/经济学/经济学期末考-复习2.md'
+                    ],  // 同样这里也可以增加其他子页面
                 },
                 {
                     text: '英语',
@@ -130,12 +148,18 @@ export default {
                 {
                     text: '近代史',
                     collapsed: false,
-                    items: ['/learn/近代史/期末资料 .md',],  // 同样这里也可以增加其他子页面
+                    items: [
+                        '/learn/近代史/期末资料 .md',
+                    ],  // 同样这里也可以增加其他子页面
                 },
                 {
                     text: '毛泽东概论',
                     collapsed: false,
-                    items: ['/learn/毛概/导论.md', '/learn/毛概/第一章.md', '/learn/毛概/第二章.md',]
+                    items: [
+                        '/learn/毛概/导论.md', 
+                        '/learn/毛概/第一章.md', 
+                        '/learn/毛概/第二章.md',
+                    ]
                 },
             ],
         },
