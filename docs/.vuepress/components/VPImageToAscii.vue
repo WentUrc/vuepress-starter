@@ -146,17 +146,17 @@ export default {
 /* 容器整体样式 */
 .image-to-ascii {
   max-width: 400px;
-  margin: 20px auto;
+  margin: 10px auto;
   padding: 20px;
   font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
-  background: var(--vp-code-block-bg);
+  border: 2px solid var(--vp-c-brand-3);
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
 
 /* 标题样式 */
 .image-to-ascii h2 {
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   text-align: center;
 }
 

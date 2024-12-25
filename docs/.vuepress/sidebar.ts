@@ -9,6 +9,8 @@ export default {
             '/beta/',  // README.md 对应路径
             '/beta/1.md',
             '/beta/2.md',
+            '/beta/3.md',
+            '/beta/4.md'
             ],
         },
     ],
