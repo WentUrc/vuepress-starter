@@ -3,8 +3,10 @@
       <h1>点击赚积分</h1>
       <p>当前积分：{{ points }}</p>
       <p>每次点击获得：{{ clickPower }} 积分</p>
-      <button @click="addPoints" class="click-button">点击我！</button>
+      <button @click="addPoints" class="click-button">点击我 !</button>
   
+      <hr class="custom-hr">
+
       <div class="upgrade-section">
         <h2>升级</h2>
         <div v-for="upgrade in upgrades" :key="upgrade.id" class="upgrade-item">
@@ -154,6 +156,8 @@
   .clicker-game {
     text-align: center;
     padding: 20px;
+    border: 2px solid var(--vp-c-brand-3);
+    border-radius: 20px;
     max-width: 500px;
     margin: auto;
   }
@@ -163,41 +167,60 @@
     font-size: 18px;
     margin: 20px 0;
     cursor: pointer;
-    background-color: #42b983;
+    background-color: var(--vp-c-brand-1);
     color: white;
     border: none;
-    border-radius: 5px;
+    border-radius: 9px;
     transition: transform 0.1s;
   }
   
   .click-button:active {
     transform: scale(0.95);
   }
+
+  /* 分隔线 */
+  .custom-hr {
+    border: none; /* 移除默认边框 */
+    height: 2px; /* 设置高度 */
+    background-color: #ccc; /* 设置颜色 */
+    margin: 20px 0; /* 设置上下外边距 */
+  }
   
   .upgrade-section,
   .auto-section {
-    margin-top: 30px;
-    text-align: left;
+    margin-top: 0px;
   }
   
   .upgrade-item,
   .auto-item {
     display: flex;
+    flex-wrap: wrap; /* 允许按钮和文字自动换行 */
+    gap: 10px; /* 按钮与文字之间的间距 */
     justify-content: space-between;
     align-items: center;
-    margin: 10px 0;
-  }
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
   
+  .upgrade-item span,
+  .auto-item span {
+    flex: 1 1 auto; /* 文字宽度自适应 */
+    min-width: 150px; /* 文字最小宽度，防止挤压 */
+  }
+
   .upgrade-item button,
   .auto-item button {
+    flex: 0 0 auto; /* 按钮宽度保持固定 */
     padding: 5px 10px;
+    margin-left: auto;
     cursor: pointer;
     background-color: #35495e;
     color: white;
     border: none;
     border-radius: 3px;
     transition: background-color 0.3s;
-  }
+}
   
   .upgrade-item button:disabled,
   .auto-item button:disabled {
@@ -217,7 +240,7 @@
     background-color: #ff4d4f;
     color: white;
     border: none;
-    border-radius: 5px;
+    border-radius: 9px;
     transition: background-color 0.3s;
   }
   
