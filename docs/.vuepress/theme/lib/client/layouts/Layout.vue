@@ -2,6 +2,7 @@
 import VPNav from '@theme/Nav/VPNav.vue'
 import VPBackdrop from '@theme/VPBackdrop.vue'
 import VPBackToTop from '@theme/VPBackToTop.vue'
+import VPBackToTop2 from '@theme/VPBackToTop2.vue'
 import VPBulletin from '@theme/VPBulletin.vue'
 import VPContent from '@theme/VPContent.vue'
 import VPEncryptGlobal from '@theme/VPEncryptGlobal.vue'
@@ -172,6 +173,7 @@ useCloseSidebarOnEscape(isSidebarOpen, closeSidebar)
         </VPContent>
       </slot>
       <VPBackToTop />
+      <VPBackToTop2 />
       <VPFooter>
         <template #footer-content>
           <slot name="footer-content" />

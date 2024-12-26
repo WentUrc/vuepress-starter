@@ -151,4 +151,10 @@ onBeforeUnmount(() => {
   opacity: 1;
   transition-delay: 0.35s;
 }
+
+@media (max-width: 725px) {
+  .back-to-top {
+    display: none;
+  }
+}
 </style>

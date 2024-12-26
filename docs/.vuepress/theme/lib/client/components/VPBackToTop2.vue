@@ -177,4 +177,10 @@ function handleClick() {
     display: none;
   }
 }
+
+@media (min-width: 725px) {
+  .vp-back-to-top{
+    display: none;
+  }
+}
 </style>
