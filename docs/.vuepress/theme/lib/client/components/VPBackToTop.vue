@@ -1,180 +1,154 @@
-<script lang="ts" setup>
-import { useElementSize, useWindowScroll, useWindowSize } from '@vueuse/core'
-import { computed, onMounted, ref, shallowRef, watch } from 'vue'
-import { useData } from '../composables/index.js'
-
-const body = shallowRef<HTMLElement | null>()
-const { height: bodyHeight } = useElementSize(body)
-const { height: windowHeight } = useWindowSize()
-onMounted(() => {
-  body.value = document.body
-})
-
-const { page } = useData()
-
-const { y } = useWindowScroll()
-const isScrolling = ref(false)
-
-const progress = computed(
-  () => (y.value / (bodyHeight.value - windowHeight.value)) * 100,
-)
-
-// #72 back to top percentage issue
-const percent = computed(() => `${Math.min(Math.round(progress.value), 100) || 0}%`)
-
-const stroke = computed(() =>
-  `calc(${Math.PI * progress.value}% - ${4 * Math.PI}px) calc(${Math.PI * 100}% - ${4 * Math.PI}px)`,
-)
-
-const mustHidden = computed(() => {
-  return page.value.frontmatter.backToTop === false || (page.value.frontmatter.pageLayout === 'home' && page.value.frontmatter.config && (page.value.frontmatter.config as any).length <= 1)
-})
-
-const show = computed(() => {
-  if (bodyHeight.value < windowHeight.value)
-    return false
-
-  else
-    return y.value > windowHeight.value / 2
-})
-
-let timer: NodeJS.Timeout | null = null
-function resetScrolling() {
-  if (timer) {
-    clearTimeout(timer)
-  }
-  timer = setTimeout(() => {
-    isScrolling.value = false
-  }, 1000)
-}
-watch(y, () => {
-  isScrolling.value = true
-  resetScrolling()
-})
-
-function handleClick() {
-  window.scrollTo({ top: 0, behavior: 'smooth' })
-}
-</script>
-
 <template>
-  <Transition name="fade">
-    <button
-      v-show="!mustHidden && (show || isScrolling)"
-      type="button"
-      class="vp-back-to-top"
-      aria-label="back to top"
-      @click="handleClick"
-    >
-      <span class="percent" :class="{ show: isScrolling }" data-allow-mismatch>{{ percent }}</span>
-      <span class="icon vpi-back-to-top" :class="{ show: !isScrolling }" />
-      <svg aria-hidden="true">
-        <circle cx="50%" cy="50%" data-allow-mismatch :style="{ 'stroke-dasharray': stroke }" />
-      </svg>
-    </button>
-  </Transition>
+  <div
+    class="back-to-top"
+    :class="{
+      load: isShow,
+      'ani-leave': isLeaving,
+      leaved: isLeaved,
+      ending: isEnding
+    }"
+    @click="handleClick"
+    aria-label="返回顶部"
+    title="返回顶部"
+  ></div>
 </template>
 
+<script lang="ts" setup>
+import { ref, onMounted, onBeforeUnmount } from 'vue';
+
+const isShow = ref(false);
+const isLeaving = ref(false);
+const isLeaved = ref(false);
+const isEnding = ref(false);
+const lock = ref(false);
+
+// 滚动事件处理函数
+const handleScroll = () => {
+  if (lock.value) return;
+  const scrollTop = window.scrollY || document.documentElement.scrollTop;
+  if (scrollTop >= 200) {
+    if (!isShow.value && !isLeaving.value) {
+      isShow.value = true;
+      isLeaved.value = false; // 确保 leaved 被重置
+    }
+  } else {
+    if (isShow.value) {
+      isShow.value = false;
+    }
+  }
+};
+
+// 点击事件处理函数
+const handleClick = () => {
+  if (lock.value) return;
+  lock.value = true;
+  isLeaving.value = true; // 添加 'ani-leave' 类
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+
+  // 120ms 后添加 'ending' 类
+  setTimeout(() => {
+    isEnding.value = true;
+  }, 120);
+
+  // 390ms 后移除 'ani-leave' 类并添加 'leaved' 类
+  setTimeout(() => {
+    isLeaving.value = false;
+    isLeaved.value = true;
+  }, 390);
+
+  // 1500ms 后移除 'load' 类
+  setTimeout(() => {
+    isShow.value = false;
+  }, 1500);
+
+  // 2000ms 后重置所有状态
+  setTimeout(() => {
+    isLeaving.value = false;
+    isEnding.value = false;
+    isShow.value = false;
+    isLeaved.value = false;
+    lock.value = false;
+  }, 2000);
+};
+
+// 添加和移除滚动事件监听器
+onMounted(() => {
+  window.addEventListener('scroll', handleScroll);
+  // 初始化按钮的显示状态
+  handleScroll();
+});
+
+onBeforeUnmount(() => {
+  window.removeEventListener('scroll', handleScroll);
+});
+</script>
+
 <style scoped>
-.vp-back-to-top {
+.back-to-top {
   position: fixed;
-  inset-inline-end: 1rem;
-  right: 24px;
-  bottom: calc(var(--vp-footer-height, 82px) - 18px);
-  z-index: var(--vp-z-index-back-to-top);
-  width: 36px;
-  height: 36px;
-  background-color: var(--vp-c-bg);
-  border-radius: 100%;
-  box-shadow: var(--vp-shadow-2);
-  transition:
-    background-color var(--vp-t-color),
-    box-shadow var(--vp-t-color);
+  z-index: 99999;
+  right: -108px; /* 初始位置 */
+  bottom: 0;
+  width: 108px;
+  height: 150px;
+  background: url("https://count.getloli.com/img/back-to-top.png?v=1") no-repeat 0 0;
+  background-size: 108px 450px;
+  opacity: 0.6;
+  transition: opacity 0.3s, right 0.8s;
+  cursor: pointer;
 }
 
-.vp-back-to-top .percent,
-.vp-back-to-top .icon {
-  position: absolute;
-  top: 0;
-  left: 0;
-  opacity: 0;
-  transition: opacity 0.5s ease, color var(--vp-t-color);
-}
-
-.vp-back-to-top .percent.show,
-.vp-back-to-top .icon.show {
+.back-to-top:hover {
+  background-position: 0 -150px;
   opacity: 1;
 }
 
-.vp-back-to-top .percent {
-  width: 100%;
-  height: 100%;
-  font-size: 10px;
-  line-height: 36px;
-  text-align: center;
-  user-select: none;
-}
-
-.vp-back-to-top .icon {
-  top: 50%;
-  left: 50%;
-  width: 18px;
-  height: 18px;
-  color: var(--vp-c-text-3);
-  transform: translate(-50%, -50%);
-}
-
-.vp-back-to-top svg {
-  width: 100%;
-  height: 100%;
-}
-
-.vp-back-to-top svg circle {
-  fill: none;
-  stroke: var(--vp-c-brand-2);
-  stroke-dasharray: 0% 314.1593%;
-  stroke-width: 4px;
-  transform: rotate(-90deg);
-  transform-origin: 50% 50%;
-
-  r: 16;
-}
-
-@media (min-width: 768px) {
-  .vp-back-to-top {
-    bottom: calc(var(--vp-footer-height, 88px) - 24px);
-    width: 48px;
-    height: 48px;
-  }
-
-  .vp-back-to-top .percent {
-    font-size: 14px;
-    line-height: 48px;
-  }
-
-  .vp-back-to-top .icon {
-    width: 24px;
-    height: 24px;
-  }
-
-  .vp-back-to-top svg circle {
-    r: 22;
-  }
-}
-
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.5s ease;
-}
-
-.fade-enter-from,
-.fade-leave-to {
+.back-to-top::after {
+  content: "";
+  position: fixed;
+  z-index: 2;
+  right: 0;
+  bottom: 0;
+  width: 108px;
+  height: 150px;
+  background: url("https://count.getloli.com/img/back-to-top.png?v=1") no-repeat 0 0;
+  background-size: 108px 450px;
+  background-position: 0 -300px;
+  transition: opacity 0.3s;
   opacity: 0;
+  pointer-events: none;
 }
 
-@media print {
-  .vp-back-to-top {
-    display: none;
+.back-to-top.load {
+  right: 0;
+}
+
+.back-to-top.ani-leave {
+  background-position: 0 -150px;
+  animation: ani-leave 800ms ease-in-out forwards;
+}
+
+@keyframes ani-leave {
+  0% {
+    right: 0;
   }
+  100% {
+    right: -108px;
+  }
+}
+
+.back-to-top.leaved,
+.back-to-top.ending {
+  pointer-events: none;
+}
+
+.back-to-top.leaved {
+  background: none;
+  transition: none;
+}
+
+.back-to-top.ending::after {
+  opacity: 1;
+  transition-delay: 0.35s;
 }
 </style>

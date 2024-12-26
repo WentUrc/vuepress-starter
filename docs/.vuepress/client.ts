@@ -4,8 +4,10 @@ import './styles/custom.css'
 import VPImageToAscii from './components/VPImageToAscii.vue'
 import VPGame1 from './components/VPGame1.vue'
 import VPGame2 from './components/VPGame2.vue'
+import VPBackToTop1 from './components/VPBackToTop1.vue'
 import VPEmbedHTML from './components/VPEmbed/VPEmbedHTML.vue'
 import VPEmbedHTML1 from './components/VPEmbed/VPEmbedHTML1.vue'
+
 
 export default defineClientConfig({
   enhance({ app }) {
@@ -15,5 +17,6 @@ export default defineClientConfig({
     app.component('VPGame2',VPGame2)
     app.component('VPEmbedHTML',VPEmbedHTML)
     app.component('VPEmbedHTML1',VPEmbedHTML1)
+    app.component('VPBackToTop',VPBackToTop1)
   },
 })
