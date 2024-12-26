@@ -102,6 +102,7 @@ export default {
                     collapsed: false,
                     items: [
                         '/learn/建筑结构/复习资料1.md',
+                        '/learn/建筑结构/复习资料2.md',
                     ],
                 },
                 {
@@ -126,26 +127,27 @@ export default {
                     text: '英语',
                     collapsed: false,
                     items: 
-                    ['/learn/英语/期末资料 .md',
-                        {
-                            text: '四级复习',
-                            collapsed: true,
-                            items: [
-                                '/learn/英语/CET-4/README.md',
-                                '/learn/英语/CET-4/0.md',
-                                '/learn/英语/CET-4/1.md',
-                                '/learn/英语/CET-4/2.md'
-                            ]
-                        },
-                        {
-                            text: '六级复习',
-                            collapsed: true,
-                            items: [
-                                '/learn/英语/CET-6/README.md',
-                                '/learn/英语/CET-6/1.md',
-                            ]
-                        },
-
+                    [
+                        '/learn/英语/期末资料 .md',
+                        '/learn/英语/期末资料2.md',
+                            {
+                                text: '四级复习',
+                                collapsed: true,
+                                items: [
+                                    '/learn/英语/CET-4/README.md',
+                                    '/learn/英语/CET-4/0.md',
+                                    '/learn/英语/CET-4/1.md',
+                                    '/learn/英语/CET-4/2.md'
+                                ]
+                            },
+                            {
+                                text: '六级复习',
+                                collapsed: true,
+                                items: [
+                                    '/learn/英语/CET-6/README.md',
+                                    '/learn/英语/CET-6/1.md',
+                                ]
+                            },
                     ],  // 同样这里也可以增加其他子页面
                 },
                 {
