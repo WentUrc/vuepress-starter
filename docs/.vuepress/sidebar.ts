@@ -11,7 +11,8 @@ export default {
             '/beta/2.md',
             '/beta/3.md',
             '/beta/4.md',
-            '/beta/5.md'
+            '/beta/5.md',
+            '/beta/6.md',
             ],
         },
     ],
