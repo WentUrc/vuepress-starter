@@ -1,350 +1,396 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Optimized Snake Game</title>
-    <style>
-        /* Reset and base styles */
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-        body {
-            background-color: #2c3e50;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            color: #ecf0f1;
-            transition: background-color 0.3s ease;
-        }
-        body.light-mode {
-            background-color: #ecf0f1;
-            color: #2c3e50;
-        }
-        #gameContainer {
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            outline: none; /* Remove default focus outline */
-        }
-        canvas {
-            background-color: #34495e;
-            border: 2px solid #ecf0f1;
-            border-radius: 10px;
-            transition: background-color 0.3s ease, border-color 0.3s ease;
-        }
-        body.light-mode canvas {
-            background-color: #bdc3c7;
-            border-color: #2c3e50;
-        }
-        #overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(44, 62, 80, 0.85);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            border-radius: 10px;
-            transition: background 0.3s ease;
-        }
-        body.light-mode #overlay {
-            background: rgba(236, 240, 241, 0.85);
-        }
-        #overlay.hidden {
-            display: none;
-        }
-        #overlay h1 {
-            margin-bottom: 20px;
-            font-size: 48px;
-            color: #e74c3c;
-        }
-        #overlay p {
-            font-size: 20px;
-        }
-        #highScore {
-            margin-top: 10px;
-            font-size: 18px;
-        }
-        #themeToggle {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background-color: transparent;
-            border: none;
-            color: #ecf0f1;
-            font-size: 24px;
-            cursor: pointer;
-            transition: color 0.3s ease;
-        }
-        body.light-mode #themeToggle {
-            color: #2c3e50;
-        }
-        #themeToggle:focus {
-            outline: none;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <title>Optimized Snake Game</title>
+  <style>
+    /* Reset and base styles */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      background-color: #2c3e50;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: #ecf0f1;
+      transition: background-color 0.3s ease;
+    }
+    body.light-mode {
+      background-color: #ecf0f1;
+      color: #2c3e50;
+    }
+    #gameContainer {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      outline: none; /* Remove default focus outline */
+    }
+    canvas {
+      background-color: #34495e;
+      border: 2px solid #ecf0f1;
+      border-radius: 10px;
+      transition: background-color 0.3s ease, border-color 0.3s ease;
+    }
+    body.light-mode canvas {
+      background-color: #bdc3c7;
+      border-color: #2c3e50;
+    }
+    #overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(44, 62, 80, 0.85);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      border-radius: 10px;
+      transition: background 0.3s ease;
+    }
+    body.light-mode #overlay {
+      background: rgba(236, 240, 241, 0.85);
+    }
+    #overlay.hidden {
+      display: none;
+    }
+    #overlay h1 {
+      margin-bottom: 20px;
+      font-size: 48px;
+      color: #e74c3c;
+    }
+    #overlay p {
+      font-size: 20px;
+    }
+    #highScore {
+      margin-top: 10px;
+      font-size: 18px;
+    }
+    #themeToggle {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background-color: transparent;
+      border: none;
+      color: #ecf0f1;
+      font-size: 24px;
+      cursor: pointer;
+      transition: color 0.3s ease;
+    }
+    body.light-mode #themeToggle {
+      color: #2c3e50;
+    }
+    #themeToggle:focus {
+      outline: none;
+    }
+  </style>
 </head>
 <body>
-    <button id="themeToggle" aria-label="Toggle Theme">🌙</button>
-    <div id="gameContainer" tabindex="0">
-        <canvas id="gameCanvas" width="800" height="600"></canvas>
-        <div id="overlay">
-            <h1>Snake Game</h1>
-            <p>Press <strong>Space</strong> to Start</p>
-            <p>Use <strong>W</strong>, <strong>A</strong>, <strong>S</strong>, <strong>D</strong> to move</p>
-            <div id="highScoreDisplay">High Score: 0</div>
-        </div>
-    </div>
+<button id="themeToggle" aria-label="Toggle Theme">🌙</button>
+<div id="gameContainer" tabindex="0">
+  <canvas id="gameCanvas" width="800" height="600"></canvas>
+  <div id="overlay">
+    <!-- 初始状态下显示“Press Space to Start” -->
+    <h1>Snake Game</h1>
+    <p>Press <strong>Space</strong> to Start</p>
+    <p>Use <strong>W</strong>, <strong>A</strong>, <strong>S</strong>, <strong>D</strong> to move</p>
+    <div id="highScoreDisplay">High Score: 0</div>
+  </div>
+</div>
 
-    <script>
-        // Get DOM elements
-        const canvas = document.getElementById('gameCanvas');
-        const ctx = canvas.getContext('2d');
-        const overlay = document.getElementById('overlay');
-        const gameContainer = document.getElementById('gameContainer');
-        const themeToggle = document.getElementById('themeToggle');
-        const highScoreDisplay = document.getElementById('highScoreDisplay');
+<script>
+/**
+ * 游戏可能处于的状态：
+ * START: 初始状态或游戏结束后，等待玩家按空格开始
+ * PLAYING: 正在进行游戏
+ * PAUSED: 暂停中
+ * GAME_OVER: 游戏结束
+ */
+let gameState = 'START';
 
-        // Game settings
-        let gridSize = 20;
-        let canvasWidth = canvas.width;
-        let canvasHeight = canvas.height;
-        let snake = [];
-        let direction = {x: 0, y: 0};
-        let nextDirection = {x: 0, y: 0};
-        let food = {x: 0, y: 0};
-        let gameInterval;
-        let gameSpeed = 150; // Initial speed in ms
-        let score = 0;
-        let highScore = 0;
-        let isPaused = false;
+// Get DOM elements
+const canvas = document.getElementById('gameCanvas');
+const ctx = canvas.getContext('2d');
+const overlay = document.getElementById('overlay');
+const gameContainer = document.getElementById('gameContainer');
+const themeToggle = document.getElementById('themeToggle');
+const highScoreDisplay = document.getElementById('highScoreDisplay');
 
-        // Initialize the game
-        function init() {
-            // Reset game variables
-            snake = [
-                {x: Math.floor(canvasWidth / (2 * gridSize)), y: Math.floor(canvasHeight / (2 * gridSize))}
-            ];
-            direction = getRandomDirection();
-            nextDirection = { ...direction };
-            placeFood();
-            score = 0;
-            updateHighScore();
-            // Clear any existing intervals
-            clearInterval(gameInterval);
-            gameInterval = setInterval(gameLoop, gameSpeed);
-            // Hide overlay
-            overlay.classList.add('hidden');
-            // Reset pause state
-            isPaused = false;
-            // Focus on game container to capture key events
-            gameContainer.focus();
-        }
+// Game settings
+let gridSize = 20;
+let canvasWidth = canvas.width;
+let canvasHeight = canvas.height;
+let snake = [];
+let direction = {x: 0, y: 0};
+let nextDirection = {x: 0, y: 0};
+let food = {x: 0, y: 0};
+let gameInterval;
+let gameSpeed = 150; // 初始速度
+let score = 0;
+let highScore = 0;
+let isPaused = false;
 
-        // Get a random initial direction
-        function getRandomDirection() {
-            const directions = [
-                {x: 0, y: -1}, // Up
-                {x: 1, y: 0},  // Right
-                {x: 0, y: 1},  // Down
-                {x: -1, y: 0}  // Left
-            ];
-            return directions[Math.floor(Math.random() * directions.length)];
-        }
+/** 加载存储的最高分 */
+function loadHighScore() {
+  const storedHighScore = localStorage.getItem('snakeHighScore');
+  if (storedHighScore !== null) {
+    highScore = parseInt(storedHighScore, 10);
+    updateHighScore();
+  }
+}
 
-        // Place food on the grid ensuring it doesn't overlap with the snake
-        function placeFood() {
-            const availablePositions = [];
-            for (let x = 0; x < canvasWidth / gridSize; x++) {
-                for (let y = 0; y < canvasHeight / gridSize; y++) {
-                    if (!snake.some(segment => segment.x === x && segment.y === y)) {
-                        availablePositions.push({x, y});
-                    }
-                }
-            }
-            if (availablePositions.length === 0) {
-                // Player wins by filling the grid
-                endGame(true);
-                return;
-            }
-            const randomIndex = Math.floor(Math.random() * availablePositions.length);
-            food = availablePositions[randomIndex];
-        }
+/** 更新最高分显示 */
+function updateHighScore() {
+  highScoreDisplay.textContent = `High Score: ${highScore}`;
+}
 
-        // Main game loop
-        function gameLoop() {
-            if (isPaused) return;
+/** 生成一个随机方向，用于游戏开始时 */
+function getRandomDirection() {
+  const directions = [
+    {x: 0, y: -1}, // Up
+    {x: 1, y: 0},  // Right
+    {x: 0, y: 1},  // Down
+    {x: -1, y: 0}, // Left
+  ];
+  return directions[Math.floor(Math.random() * directions.length)];
+}
 
-            // Update direction
-            direction = nextDirection;
+/** 放置食物，确保位置不与蛇重叠 */
+function placeFood() {
+  const availablePositions = [];
+  for (let x = 0; x < canvasWidth / gridSize; x++) {
+    for (let y = 0; y < canvasHeight / gridSize; y++) {
+      if (!snake.some(segment => segment.x === x && segment.y === y)) {
+        availablePositions.push({x, y});
+      }
+    }
+  }
+  if (availablePositions.length === 0) {
+    // Player wins by filling the grid
+    endGame(true);
+    return;
+  }
+  const randomIndex = Math.floor(Math.random() * availablePositions.length);
+  food = availablePositions[randomIndex];
+}
 
-            // Calculate new head position
-            const newHead = {
-                x: snake[0].x + direction.x,
-                y: snake[0].y + direction.y
-            };
+/** 主游戏循环 */
+function gameLoop() {
+  if (isPaused) return;
 
-            // Check collisions
-            if (
-                newHead.x < 0 ||
-                newHead.x >= canvasWidth / gridSize ||
-                newHead.y < 0 ||
-                newHead.y >= canvasHeight / gridSize ||
-                snake.some(segment => segment.x === newHead.x && segment.y === newHead.y)
-            ) {
-                endGame(false);
-                return;
-            }
+  // 更新方向
+  direction = nextDirection;
 
-            // Add new head to the snake
-            snake.unshift(newHead);
+  // 计算新蛇头位置
+  const newHead = {
+    x: snake[0].x + direction.x,
+    y: snake[0].y + direction.y
+  };
 
-            // Check if food is eaten
-            if (newHead.x === food.x && newHead.y === food.y) {
-                score++;
-                if (score > highScore) {
-                    highScore = score;
-                    updateHighScore();
-                    localStorage.setItem('snakeHighScore', highScore);
-                }
-                placeFood();
-                // Increase speed every 5 points
-                if (score % 5 === 0 && gameSpeed > 50) {
-                    gameSpeed -= 10;
-                    clearInterval(gameInterval);
-                    gameInterval = setInterval(gameLoop, gameSpeed);
-                }
-            } else {
-                // Remove the tail
-                snake.pop();
-            }
+  // 碰撞检测：与边界或与自身重叠
+  if (
+    newHead.x < 0 ||
+    newHead.x >= canvasWidth / gridSize ||
+    newHead.y < 0 ||
+    newHead.y >= canvasHeight / gridSize ||
+    snake.some(segment => segment.x === newHead.x && segment.y === newHead.y)
+  ) {
+    endGame(false);
+    return;
+  }
 
-            draw();
-        }
+  // 正常移动：把新头放到队首
+  snake.unshift(newHead);
 
-        // Draw the game elements
-        function draw() {
-            // Clear the canvas
-            ctx.fillStyle = document.body.classList.contains('light-mode') ? '#bdc3c7' : '#34495e';
-            ctx.fillRect(0, 0, canvasWidth, canvasHeight);
+  // 判断是否吃到食物
+  if (newHead.x === food.x && newHead.y === food.y) {
+    score++;
+    if (score > highScore) {
+      highScore = score;
+      localStorage.setItem('snakeHighScore', highScore);
+      updateHighScore();
+    }
+    placeFood();
 
-            // Draw the food
-            ctx.fillStyle = '#e74c3c';
-            ctx.fillRect(food.x * gridSize, food.y * gridSize, gridSize, gridSize);
+    // 每 5 分加快一次速度
+    if (score % 5 === 0 && gameSpeed > 50) {
+      gameSpeed -= 10;
+      clearInterval(gameInterval);
+      gameInterval = setInterval(gameLoop, gameSpeed);
+    }
+  } else {
+    // 未吃到食物，移除尾巴
+    snake.pop();
+  }
 
-            // Draw the snake
-            ctx.fillStyle = '#2ecc71';
-            snake.forEach((segment, index) => {
-                ctx.fillRect(segment.x * gridSize, segment.y * gridSize, gridSize - 2, gridSize - 2);
-            });
+  draw();
+}
 
-            // Draw score on the canvas
-            ctx.fillStyle = document.body.classList.contains('light-mode') ? '#2c3e50' : '#ecf0f1';
-            ctx.font = '20px Arial';
-            ctx.fillText(`Score: ${score}`, 10, 25);
-        }
+/** 绘制所有元素 */
+function draw() {
+  // 清空画布
+  ctx.fillStyle = document.body.classList.contains('light-mode') 
+    ? '#bdc3c7' 
+    : '#34495e';
+  ctx.fillRect(0, 0, canvasWidth, canvasHeight);
 
-        // Handle game over
-        function endGame(won) {
-            clearInterval(gameInterval);
-            overlay.innerHTML = `
-                <h1>${won ? 'You Win!' : 'Game Over'}</h1>
-                <p>Press <strong>Space</strong> to Restart</p>
-                <p>Score: ${score}</p>
-                <div id="highScoreDisplay">High Score: ${highScore}</div>
-            `;
-            overlay.classList.remove('hidden');
-        }
+  // 绘制食物
+  ctx.fillStyle = '#e74c3c';
+  ctx.fillRect(food.x * gridSize, food.y * gridSize, gridSize, gridSize);
 
-        // Update high score display
-        function updateHighScore() {
-            highScoreDisplay.textContent = `High Score: ${highScore}`;
-        }
+  // 绘制蛇
+  ctx.fillStyle = '#2ecc71';
+  snake.forEach(segment => {
+    ctx.fillRect(segment.x * gridSize, segment.y * gridSize, gridSize - 2, gridSize - 2);
+  });
 
-        // Load high score from localStorage
-        function loadHighScore() {
-            const storedHighScore = localStorage.getItem('snakeHighScore');
-            if (storedHighScore !== null) {
-                highScore = parseInt(storedHighScore, 10);
-                updateHighScore();
-            }
-        }
+  // 显示分数
+  ctx.fillStyle = document.body.classList.contains('light-mode') 
+    ? '#2c3e50' 
+    : '#ecf0f1';
+  ctx.font = '20px Arial';
+  ctx.fillText(`Score: ${score}`, 10, 25);
+}
 
-        // Handle key presses
-        document.addEventListener('keydown', (e) => {
-            const key = e.key.toLowerCase();
-            if (key === 'w' && direction.y !== 1) {
-                nextDirection = {x: 0, y: -1};
-            } else if (key === 'a' && direction.x !== 1) {
-                nextDirection = {x: -1, y: 0};
-            } else if (key === 's' && direction.y !== -1) {
-                nextDirection = {x: 0, y: 1};
-            } else if (key === 'd' && direction.x !== -1) {
-                nextDirection = {x: 1, y: 0};
-            } else if (key === ' ') {
-                if (overlay.classList.contains('hidden')) {
-                    // Toggle restart
-                    isPaused = !isPaused;
-                    if (isPaused) {
-                        overlay.innerHTML = `
-                            <h1>Restart</h1>
-                            <p>Press <strong>Space</strong> to Resume</p>
-                            <p>Score: ${score}</p>
-                            <div id="highScoreDisplay">High Score: ${highScore}</div>
-                        `;
-                        overlay.classList.remove('hidden');
-                    } else {
-                        overlay.classList.add('hidden');
-                        gameContainer.focus();
-                    }
-                } else {
-                    // Start or restart the game
-                    init();
-                }
-            }
-        });
+/** 开始或重置游戏 */
+function init() {
+  // 重置游戏速度
+  gameSpeed = 150;
+  clearInterval(gameInterval);
 
-        // Handle theme toggle
-        themeToggle.addEventListener('click', () => {
-            document.body.classList.toggle('light-mode');
-            themeToggle.textContent = document.body.classList.contains('light-mode') ? '☀️' : '🌙';
-            draw(); // Redraw to update colors
-        });
+  // 重置分数
+  score = 0;
+  
+  // 初始化蛇（只放一个点即可）
+  snake = [
+    {x: Math.floor(canvasWidth / (2 * gridSize)), y: Math.floor(canvasHeight / (2 * gridSize))}
+  ];
+  
+  // 初始方向给一个随机值，也可以直接固定为{x:1,y:0}向右
+  direction = getRandomDirection();
+  nextDirection = {...direction};
 
-        // Handle window resize for responsive design
-        window.addEventListener('resize', () => {
-            const aspectRatio = 4 / 3; // Maintain 4:3 aspect ratio
-            let newWidth = window.innerWidth * 0.8;
-            let newHeight = newWidth / aspectRatio;
-            if (newHeight > window.innerHeight * 0.8) {
-                newHeight = window.innerHeight * 0.8;
-                newWidth = newHeight * aspectRatio;
-            }
-            canvas.width = newWidth;
-            canvas.height = newHeight;
-            canvasWidth = canvas.width;
-            canvasHeight = canvas.height;
-            gridSize = Math.floor(newWidth / 40); // Adjust grid size based on canvas width
-            draw();
-        });
+  placeFood();
+  updateHighScore();
 
-        // Initialize responsive canvas size on load
-        window.dispatchEvent(new Event('resize'));
+  // 启动游戏循环
+  gameInterval = setInterval(gameLoop, gameSpeed);
 
-        // Load high score from previous sessions
-        loadHighScore();
+  // overlay 隐藏
+  overlay.classList.add('hidden');
+  isPaused = false;
+  gameState = 'PLAYING';
 
-        // Initial draw and focus
-        draw();
-        gameContainer.focus();
-    </script>
+  // 聚焦 container 以捕获键盘事件
+  gameContainer.focus();
+}
+
+/** 暂停游戏 */
+function pauseGame() {
+  isPaused = true;
+  gameState = 'PAUSED';
+  overlay.classList.remove('hidden');
+  overlay.innerHTML = `
+    <h1>Paused</h1>
+    <p>Press <strong>Space</strong> to Resume</p>
+    <p>Score: ${score}</p>
+    <div id="highScoreDisplay">High Score: ${highScore}</div>
+  `;
+}
+
+/** 恢复游戏 */
+function resumeGame() {
+  isPaused = false;
+  gameState = 'PLAYING';
+  overlay.classList.add('hidden');
+  gameContainer.focus();
+}
+
+/** 游戏结束或获胜 */
+function endGame(won) {
+  clearInterval(gameInterval);
+  gameState = 'GAME_OVER';
+  overlay.classList.remove('hidden');
+  overlay.innerHTML = `
+    <h1>${won ? 'You Win!' : 'Game Over'}</h1>
+    <p>Press <strong>Space</strong> to Restart</p>
+    <p>Score: ${score}</p>
+    <div id="highScoreDisplay">High Score: ${highScore}</div>
+  `;
+}
+
+/** 键盘事件监听 */
+document.addEventListener('keydown', (e) => {
+  const key = e.key.toLowerCase();
+
+  switch (key) {
+    case 'w':
+      if (direction.y !== 1) nextDirection = {x: 0, y: -1};
+      break;
+    case 'a':
+      if (direction.x !== 1) nextDirection = {x: -1, y: 0};
+      break;
+    case 's':
+      if (direction.y !== -1) nextDirection = {x: 0, y: 1};
+      break;
+    case 'd':
+      if (direction.x !== -1) nextDirection = {x: 1, y: 0};
+      break;
+    case ' ':
+      // 空格逻辑：根据 gameState 不同而行为不同
+      if (gameState === 'START' || gameState === 'GAME_OVER') {
+        // 从开始界面或结束界面进入新一局
+        init();
+      } else if (gameState === 'PLAYING') {
+        // 暂停
+        pauseGame();
+      } else if (gameState === 'PAUSED') {
+        // 恢复
+        resumeGame();
+      }
+      break;
+  }
+});
+
+/** 主题切换 */
+themeToggle.addEventListener('click', () => {
+  document.body.classList.toggle('light-mode');
+  themeToggle.textContent = document.body.classList.contains('light-mode') ? '☀️' : '🌙';
+  // 切换主题后，重绘一次画布
+  draw();
+});
+
+/** 窗口大小自适应（简化处理） */
+window.addEventListener('resize', () => {
+  const aspectRatio = 4 / 3; // Maintain 4:3 aspect ratio
+  let newWidth = window.innerWidth * 0.8;
+  let newHeight = newWidth / aspectRatio;
+  if (newHeight > window.innerHeight * 0.8) {
+    newHeight = window.innerHeight * 0.8;
+    newWidth = newHeight * aspectRatio;
+  }
+  canvas.width = newWidth;
+  canvas.height = newHeight;
+  canvasWidth = canvas.width;
+  canvasHeight = canvas.height;
+
+  // 这里仅重新计算 gridSize 并重绘
+  // 注意：蛇和食物坐标并未做等比缩放，如果想真正跟随画布变化，需要更复杂的处理
+  gridSize = Math.floor(newWidth / 40);
+  draw();
+});
+
+/** 初始化：加载最高分 & 进行初次绘制 */
+loadHighScore();
+draw();
+gameContainer.focus();
+</script>
 </body>
 </html>
