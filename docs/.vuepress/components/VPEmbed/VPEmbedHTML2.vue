@@ -336,12 +336,16 @@ export default {
   color: #ecf0f1;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   transition: background-color 0.3s ease;
+  border: 5px solid #bdc3c7;
+  border-radius: 15px;
 }
 
 /* 浅色模式 */
 .light-mode.snake-game-wrapper {
   background-color: #ecf0f1;
   color: #2c3e50;
+  border: 5px solid var(--vp-c-brand-3);
+  border-radius: 15px;
 }
 
 /* 切换主题的按钮 */
@@ -350,6 +354,7 @@ export default {
   top: 20px;
   right: 20px;
   background: transparent;
+  z-index: 9999;
   border: none;
   font-size: 24px;
   cursor: pointer;
@@ -359,10 +364,11 @@ export default {
 
 /* 游戏主容器 */
 .game-container {
-  position: relative;
+  display: flex;
+  flex-direction: column;
+  margin-top: 10%;
+  padding: 50px;
   outline: none; /* 去除焦点框 */
-  border: 2px solid var(--vp-c-brand-3);
-  border-radius: 15px;
 }
 
 /* 画布 */
@@ -382,8 +388,8 @@ canvas {
   position: absolute;
   top: 0; 
   left: 0;
-  width: 800px;   /* 与 canvasWidth 相同即可 */
-  height: 600px;  /* 与 canvasHeight 相同即可 */
+  width: 100%;   /* 与 canvasWidth 相同即可 */
+  height: 100%;  /* 与 canvasHeight 相同即可 */
   background: rgba(44, 62, 80, 0.85);
   display: flex;
   flex-direction: column;
