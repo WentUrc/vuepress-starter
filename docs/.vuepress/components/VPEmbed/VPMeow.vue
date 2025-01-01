@@ -1,4 +1,3 @@
-<!-- src/components/EmbedIframe.vue -->
 <template>
     <iframe
       :srcdoc="htmlContent"

@@ -91,7 +91,7 @@ onBeforeUnmount(() => {
   bottom: 0;
   width: 108px;
   height: 150px;
-  background: url("https://count.getloli.com/img/back-to-top.png?v=1") no-repeat 0 0;
+  background: url(/img/back-to-top.png) no-repeat 0 0;
   background-size: 108px 450px;
   opacity: 0.6;
   transition: opacity 0.3s, right 0.8s;
@@ -111,7 +111,7 @@ onBeforeUnmount(() => {
   bottom: 0;
   width: 108px;
   height: 150px;
-  background: url("https://count.getloli.com/img/back-to-top.png?v=1") no-repeat 0 0;
+  background: url(/img/back-to-top.png) no-repeat 0 0;
   background-size: 108px 450px;
   background-position: 0 -300px;
   transition: opacity 0.3s;
