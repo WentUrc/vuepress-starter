@@ -57,7 +57,7 @@ export default defineThemeConfig({
                     " 
                     onmouseover="this.style.backgroundPosition='100% 50%';" 
                     onmouseout="this.style.backgroundPosition='0% 50%';">
-                        冰苷晶 Cabinina
+                        冰苷晶 IGCyukira
                     </span>
                 </span>
             </span>
