@@ -29,18 +29,18 @@
         <h1>{{ overlayTitle }}</h1>
 
         <!-- 不同状态下的说明文字示例 -->
-        <p v-if="gameState === 'START'">Press <strong>Space</strong> to Start</p>
-        <p v-else-if="gameState === 'GAME_OVER'">Press <strong>Space</strong> to Restart</p>
-        <p v-else-if="gameState === 'PAUSED'">Press <strong>Space</strong> to Resume</p>
+        <span class="p1" v-if="gameState === 'START'">Press <strong>Space</strong> to Start</span>
+        <span class="p1" v-else-if="gameState === 'GAME_OVER'">Press <strong>Space</strong> to Restart</span>
+        <span class="p1" v-else-if="gameState === 'PAUSED'">Press <strong>Space</strong> to Resume</span>
 
         <!-- 提示 WASD 控制 -->
-        <p v-if="gameState === 'START' || gameState === 'GAME_OVER'">
+        <span class="p1" v-if="gameState === 'START' || gameState === 'GAME_OVER'">
           Use <strong>W</strong>, <strong>A</strong>, <strong>S</strong>, <strong>D</strong> to move
-        </p>
+        </span>
         <!-- 暂停时显示分数 -->
-        <p v-else-if="gameState === 'PAUSED'">Score: {{ score }}</p>
+        <span class="p2" v-else-if="gameState === 'PAUSED'">Score: {{ score }}</span>
 
-        <div>High Score: {{ highScore }}</div>
+        <span class="p2">High Score: {{ highScore }}</span>
       </div>
     </div>
   </div>
@@ -333,7 +333,7 @@ export default {
   width: 100%;
   height: 100%;
   background-color: #2c3e50;
-  color: #ecf0f1;
+  color: #00c5f7;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   transition: background-color 0.3s ease;
   border: 5px solid #bdc3c7;
@@ -343,7 +343,7 @@ export default {
 /* 浅色模式 */
 .light-mode.snake-game-wrapper {
   background-color: #ecf0f1;
-  color: #2c3e50;
+  color: #0884ff;
   border: 5px solid var(--vp-c-brand-3);
   border-radius: 15px;
 }
@@ -354,7 +354,7 @@ export default {
   top: 20px;
   right: 20px;
   background: transparent;
-  z-index: 9999;
+  z-index: 9;
   border: none;
   font-size: 24px;
   cursor: pointer;
@@ -369,6 +369,18 @@ export default {
   margin-top: 10%;
   padding: 50px;
   outline: none; /* 去除焦点框 */
+}
+
+.p1 {
+  margin-top: 50px;
+  color: #00c5f7;
+  font-size: 1.5em;
+}
+
+.p2 {
+  margin-top: 20px;
+  color: #00c5f7;
+  font-size: 1em;
 }
 
 /* 画布 */
