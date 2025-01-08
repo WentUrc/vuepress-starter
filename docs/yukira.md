@@ -10,7 +10,9 @@ tags: [隐藏]
 ### **1. 基本信息**
   - **名字**：
     - **中文**：冰苷晶
-    - **English**：Yukira Iceglicry
+    - **English**：
+      - `Yukira Iceglicry` ( full )
+      - `IGCyukira` ( abbreviation )
     - **日本語**：グリコシド結晶
   - **性别**：少女  
   - **年龄**：外表16岁，真实年龄不明（因冰霜魔力赋予生命）  
