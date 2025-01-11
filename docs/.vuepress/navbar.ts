@@ -60,6 +60,10 @@ export default defineNavbarConfig([
       ]
     },
 
+    { text: 'Test Site',
+      link: '/friends/',
+    },
+
     { text: 'Novel', 
       items: 
       [
