@@ -6,7 +6,7 @@ export default defineNavbarConfig([
       link: '/beta/' 
     },
 
-    { text: 'Test Site',
+    { text: 'Test-Site',
       link: '/friends/',
     },
 
