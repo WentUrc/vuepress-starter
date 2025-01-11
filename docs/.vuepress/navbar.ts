@@ -6,6 +6,10 @@ export default defineNavbarConfig([
       link: '/beta/' 
     },
 
+    { text: 'Test-Site',
+      link: '/friends/',
+    },
+
     { text: 'Tech-Document', 
       link: '/tech/',
     },
@@ -58,10 +62,6 @@ export default defineNavbarConfig([
         },
 
       ]
-    },
-
-    { text: 'Test Site',
-      link: '/friends/',
     },
 
     { text: 'Novel', 
