@@ -13,6 +13,8 @@ export default {
             '/beta/4.md',
             '/beta/5.md',
             '/beta/6.md',
+            '/beta/7.md',
+            '/beta/8.md'
             ],
         },
     ],
