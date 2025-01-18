@@ -8,6 +8,7 @@ import VPEmbedHTML from './components/VPEmbed/VPEmbedHTML.vue'
 import VPEmbedHTML1 from './components/VPEmbed/VPEmbedHTML1.vue'
 import VPEmbedHTML2 from './components/VPEmbed/VPEmbedHTML2.vue'
 import VPMeowWbb from './components/VPEmbed/VPMeowWbb.vue'
+import VPUniversalPlayer from './components/VPUniversalPlayer.vue'
 
 
 export default defineClientConfig({
@@ -20,5 +21,6 @@ export default defineClientConfig({
     app.component('VPEmbedHTML1',VPEmbedHTML1)
     app.component('VPEmbedHTML2',VPEmbedHTML2)
     app.component('VPMeowWbb', VPMeowWbb)
+    app.component('VPUniversalPlayer',VPUniversalPlayer)
   },
 })
