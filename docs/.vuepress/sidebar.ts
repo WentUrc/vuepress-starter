@@ -14,7 +14,7 @@ export default {
             '/beta/5.md',
             '/beta/6.md',
             '/beta/7.md',
-            '/beta/8.md'
+            '/beta/8.md',
             ],
         },
     ],
@@ -84,6 +84,7 @@ export default {
             '13.md',
             '14.md',
             '15.md',
+            '16.md',
             ],  // 同样这里也可以增加其他子页面
         },
     ],
