@@ -14,10 +14,6 @@ export default defineNavbarConfig([
       link: '/tech/',
     },
 
-    { text: 'ChatGPT Said', 
-      link: '/GPTstory/',
-    },
-
     { text: 'WentUrc Learn', 
       items: 
       [
@@ -63,19 +59,5 @@ export default defineNavbarConfig([
 
       ]
     },
-
-    { text: 'Novel', 
-      items: 
-      [
-        {
-          text:'小说',
-          link: '/novel/',
-        },
-        {
-          text: 'Re - 从零开始的异世界生活',
-          link: '/novel/Re - 从零开始的异世界生活/'
-        },
-      ]
-    }, 
 
 ])
