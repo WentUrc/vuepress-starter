@@ -19,7 +19,7 @@ tags: [隐藏部分]
   - **名字**：
     - **中文**：冰苷晶
     - **English**：
-      - `Yukira Iceglicry` ( full )
+      - `Yukira Crystal` ( full )
       - `IGCyukira` ( abbreviation )
     - **日本語**：グリコシド結晶
   - **性别**：女  
