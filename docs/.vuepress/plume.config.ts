@@ -4,15 +4,16 @@ import sidebar from './sidebar';
 
 export default defineThemeConfig({
     logo: '/logo.png',
-    docsRepo: 'https://github.com/WentUrc/vuepress-starter',
-    docsBranch:'docs',
-    docsDir: 'docs',
 
     profile: {
         avatar: '/logo-O2.jpg',
         name: 'WentUrc Docs',
         description: '兰花草，梅花桩',
     },
+
+    social: [
+        { icon: 'github', link: 'https://github.com/IGCrystal-NEO' },
+    ],
 
     navbar,
     sidebar,
