@@ -10,19 +10,15 @@ config:
     hero:
       name: WentUrc Docs
       tagline: 为什么昨晚的清醒与今日的倦意遥相呼应
-      text: 话说这个 text 必须要写吗
+      text: 路很长，梦还在
       actions:
-        -
-          text: 快速开始
-          link: /learn/
-          theme: brand
-        -
-          text: Github
-          link: https://github.com/WentUrc/vuepress-starter
-          theme: alt
         -
           text: WentUrc
           link: https://wenturc.com
+          theme: brand
+        -
+          text: Github
+          link: https://github.com/IGCrystal-NEO
           theme: alt
 
 ---
