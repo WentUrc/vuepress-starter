@@ -35,8 +35,15 @@ export default defineUserConfig({
     },
   }),
 
-  alias: {
-
+    alias: {
+    '@theme/Home/VPHomeBanner.vue': path.resolve(
+      __dirname,
+      './components/VPHomeBanner.vue',
+    ),
+    '@theme/Blog/VPPostItem.vue': path.resolve(
+      __dirname,
+      './components/VPPostItem.vue',  
+    ),
   },
 
   bundler: viteBundler(),
